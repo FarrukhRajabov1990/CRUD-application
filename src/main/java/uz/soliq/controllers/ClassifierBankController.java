@@ -18,6 +18,7 @@ public class ClassifierBankController {
 
     private final ClassifierBankService service;
 
+    
     @GetMapping("/get/all")
     public ResponseEntity<ResponseData<List<ClassifierBank>>> getAll() {
         return service.getAll();
