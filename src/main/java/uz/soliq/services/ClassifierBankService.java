@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface ClassifierBankService {
 
-
     ClassifierBank findById(String id) throws CustomNotFoundException;
     ResponseEntity<ResponseData<List<ClassifierBank>>> getAll();
     ResponseEntity<ResponseData<ClassifierBank>> add(ClassifierBankDTO dto);
