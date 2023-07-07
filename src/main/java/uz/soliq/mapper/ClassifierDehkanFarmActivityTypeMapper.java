@@ -8,6 +8,7 @@ import uz.soliq.entities.ClassifierDehkanFarmActivityType;
 @Mapper(componentModel = "spring")
 public interface ClassifierDehkanFarmActivityTypeMapper {
 
+
     @Mapping(target = "id", source = "id")
     @Mapping(target = "code", source = "code")
     @Mapping(target = "createTs", ignore = true)

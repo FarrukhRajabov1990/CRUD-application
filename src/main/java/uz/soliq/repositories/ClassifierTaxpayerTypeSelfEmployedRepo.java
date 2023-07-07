@@ -8,6 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface ClassifierTaxpayerTypeSelfEmployedRepo extends
+
         JpaRepository<ClassifierTaxpayerTypeSelfEmployed, String> {
     Optional<ClassifierTaxpayerTypeSelfEmployed> findById(String id);
 }

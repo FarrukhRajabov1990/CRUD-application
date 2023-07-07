@@ -5,6 +5,7 @@ import org.mapstruct.Mapping;
 import uz.soliq.dto.ClassifierSoatoDTO;
 import uz.soliq.entities.ClassifierSoato;
 
+
 @Mapper(componentModel = "spring")
 public interface ClassifierSoatoMapper {
 

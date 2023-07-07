@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface ClassifierTaxpayerTypeSelfEmployedService {
 
+
     ClassifierTaxpayerTypeSelfEmployed findById(String id) throws CustomNotFoundException;
     ResponseEntity<ResponseData<List<ClassifierTaxpayerTypeSelfEmployed>>> getAll();
     ResponseEntity<ResponseData<ClassifierTaxpayerTypeSelfEmployed>> add(

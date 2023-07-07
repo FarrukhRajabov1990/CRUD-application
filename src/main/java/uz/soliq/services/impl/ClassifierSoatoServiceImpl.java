@@ -18,6 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ClassifierSoatoServiceImpl implements ClassifierSoatoService {
 
+
     private final ClassifierSoatoRepo repo;
     private final ClassifierSoatoMapper mapper;
 

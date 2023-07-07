@@ -8,6 +8,7 @@ import uz.soliq.entities.ClassifierIndividualEntrepreneurActivityType;
 @Mapper(componentModel = "spring")
 public interface ClassifierIndividualEntrepreneurActivityTypeMapper {
 
+
     @Mapping(target = "id", source = "id")
     @Mapping(target = "code", source = "code")
     @Mapping(target = "createTs", ignore = true)

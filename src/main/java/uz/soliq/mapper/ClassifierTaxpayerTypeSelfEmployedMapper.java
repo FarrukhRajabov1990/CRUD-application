@@ -8,6 +8,7 @@ import uz.soliq.entities.ClassifierTaxpayerTypeSelfEmployed;
 @Mapper(componentModel = "spring")
 public interface ClassifierTaxpayerTypeSelfEmployedMapper {
 
+
     @Mapping(target = "id", source = "id")
     @Mapping(target = "code", source = "code")
     @Mapping(target = "createTs", ignore = true)

@@ -22,6 +22,7 @@ public class ClassifierTaxpayerTypeSelfEmployedServiceImpl implements
     private final ClassifierTaxpayerTypeSelfEmployedRepo repo;
     private final ClassifierTaxpayerTypeSelfEmployedMapper mapper;
 
+
     @Override
     public ClassifierTaxpayerTypeSelfEmployed findById(String id) throws CustomNotFoundException {
         Optional<ClassifierTaxpayerTypeSelfEmployed> employedOptional = repo.findById(id);

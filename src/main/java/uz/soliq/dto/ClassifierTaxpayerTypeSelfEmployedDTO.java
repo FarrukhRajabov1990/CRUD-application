@@ -12,6 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ClassifierTaxpayerTypeSelfEmployedDTO {
 
+
     @JsonProperty("id")
     private String id;
 

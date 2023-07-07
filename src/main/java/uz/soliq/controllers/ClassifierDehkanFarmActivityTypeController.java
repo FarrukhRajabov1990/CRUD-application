@@ -11,6 +11,7 @@ import uz.soliq.services.ClassifierDehkanFarmActivityTypeService;
 
 import java.util.List;
 
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/classifier/dehkan/farmActivityType")

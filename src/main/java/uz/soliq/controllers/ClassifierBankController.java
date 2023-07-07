@@ -11,6 +11,7 @@ import uz.soliq.services.ClassifierBankService;
 
 import java.util.List;
 
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/classifierBank")

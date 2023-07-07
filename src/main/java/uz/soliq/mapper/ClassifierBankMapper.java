@@ -5,6 +5,7 @@ import org.mapstruct.Mapping;
 import uz.soliq.dto.ClassifierBankDTO;
 import uz.soliq.entities.ClassifierBank;
 
+
 @Mapper(componentModel = "spring")
 public interface ClassifierBankMapper {
 

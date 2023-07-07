@@ -6,6 +6,7 @@ import uz.soliq.entities.ClassifierSoato;
 
 import java.util.Optional;
 
+
 @Repository
 public interface ClassifierSoatoRepo extends JpaRepository<ClassifierSoato, String> {
     Optional<ClassifierSoato> findById(String id);

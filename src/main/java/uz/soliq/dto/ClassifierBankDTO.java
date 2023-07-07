@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ClassifierBankDTO {
 
+
     @JsonProperty("id")
     private String id;
 

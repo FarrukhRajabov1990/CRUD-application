@@ -19,6 +19,8 @@ import javax.validation.constraints.Size;
 @Table(name = "CLASSIFIER_INDIVIDUAL_ENTREPRENEUR_ACTIVITY_TYPE")
 public class ClassifierIndividualEntrepreneurActivityType extends BaseEntity {
 
+
+
     @Size(max = 255, message = "Code is too long")
     @Column(name = "CODE", nullable = false)
     private String code;

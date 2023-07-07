@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface ClassifierIndividualEntrepreneurActivityTypeService {
 
+
     ClassifierIndividualEntrepreneurActivityType findById(String id) throws CustomNotFoundException;
     ResponseEntity<ResponseData<List<ClassifierIndividualEntrepreneurActivityType>>> getAll();
     ResponseEntity<ResponseData<ClassifierIndividualEntrepreneurActivityType>> add

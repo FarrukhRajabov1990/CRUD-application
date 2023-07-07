@@ -11,6 +11,7 @@ import uz.soliq.services.ClassifierTaxpayerTypeSelfEmployedService;
 
 import java.util.List;
 
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/classifierTaxpayerTypeSelfEmployed")

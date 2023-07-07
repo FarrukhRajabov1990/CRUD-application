@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface ClassifierSoatoService {
 
+
     ClassifierSoato findById(String id) throws CustomNotFoundException;
     ResponseEntity<ResponseData<List<ClassifierSoato>>> getAll();
     ResponseEntity<ResponseData<ClassifierSoato>> add(ClassifierSoatoDTO dto);

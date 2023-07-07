@@ -18,6 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ClassifierDehkanFarmActivityTypeServiceImpl implements ClassifierDehkanFarmActivityTypeService {
 
+
     private final ClassifierDehkanFarmActivityTypeRepo repo;
     private final ClassifierDehkanFarmActivityTypeMapper mapper;
 

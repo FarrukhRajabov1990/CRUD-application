@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface ClassifierDehkanFarmActivityTypeService {
 
+
     ClassifierDehkanFarmActivityType findById(String id) throws CustomNotFoundException;
     ResponseEntity<ResponseData<List<ClassifierDehkanFarmActivityType>>> getAll();
     ResponseEntity<ResponseData<ClassifierDehkanFarmActivityType>> add(ClassifierDehkanFarmActivityTypeDTO dto);

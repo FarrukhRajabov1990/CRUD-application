@@ -11,6 +11,7 @@ import uz.soliq.services.ClassifierIndividualEntrepreneurActivityTypeService;
 
 import java.util.List;
 
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/classifierIndividualEntrepreneurActivityType")
@@ -22,6 +23,7 @@ public class ClassifierIndividualEntrepreneurActivityTypeController {
     public ResponseEntity<ResponseData<List<ClassifierIndividualEntrepreneurActivityType>>> getAll() {
         return service.getAll();
     }
+
 
     @GetMapping("/get/{id}")
     public ClassifierIndividualEntrepreneurActivityType get(@PathVariable(value = "id") String id)

@@ -8,6 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface ClassifierIndividualEntrepreneurActivityTypeRepo extends
+
         JpaRepository<ClassifierIndividualEntrepreneurActivityType, String> {
     Optional<ClassifierIndividualEntrepreneurActivityType> findById(String id);
 }

@@ -19,6 +19,7 @@ import java.util.Optional;
 public class ClassifierIndividualEntrepreneurActivityTypeServiceImpl
         implements ClassifierIndividualEntrepreneurActivityTypeService {
 
+
     private final ClassifierIndividualEntrepreneurActivityTypeRepo repo;
     private final ClassifierIndividualEntrepreneurActivityTypeMapper mapper;
 

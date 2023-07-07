@@ -6,6 +6,7 @@ import uz.soliq.entities.ClassifierBank;
 
 import java.util.Optional;
 
+
 @Repository
 public interface ClassifierBankRepo extends JpaRepository<ClassifierBank, String> {
     Optional<ClassifierBank> findById(String id);

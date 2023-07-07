@@ -18,6 +18,7 @@ import javax.persistence.Table;
 @Table(name = "CLASSIFIER_DEHKAN_FARM_ACTIVITY_TYPE")
 public class ClassifierDehkanFarmActivityType extends BaseEntity {
 
+
     @Column(name = "CODE", nullable = false)
     private String code;
 }

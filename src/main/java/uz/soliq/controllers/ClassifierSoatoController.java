@@ -16,6 +16,7 @@ import java.util.List;
 @RequestMapping("/classifierSoato")
 public class ClassifierSoatoController {
 
+
     private final ClassifierSoatoService service;
 
     @GetMapping("/get/all")
