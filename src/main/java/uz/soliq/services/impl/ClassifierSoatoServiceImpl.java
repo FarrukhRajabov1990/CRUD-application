@@ -10,6 +10,7 @@ import uz.soliq.exceptions.CustomNotFoundException;
 import uz.soliq.mapper.ClassifierSoatoMapper;
 import uz.soliq.repositories.ClassifierSoatoRepo;
 import uz.soliq.services.ClassifierSoatoService;
+import uz.soliq.specifications.Soato;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +22,7 @@ public class ClassifierSoatoServiceImpl implements ClassifierSoatoService {
 
     private final ClassifierSoatoRepo repo;
     private final ClassifierSoatoMapper mapper;
+    private final Soato querySearch;
 
     @Override
     public ClassifierSoato findById(String id) throws CustomNotFoundException {
@@ -62,5 +64,11 @@ public class ClassifierSoatoServiceImpl implements ClassifierSoatoService {
         }
         repo.delete(soatoOptional.get());
         return ResponseData.success200(true);
+    }
+
+    @Override
+    public ResponseEntity<ResponseData<List<ClassifierSoato>>> findBySimpleQuery(
+            String createdBy,  String deletedBy, String name) {
+        return ResponseData.success200(querySearch.findAllBySimpleQuery(createdBy, deletedBy, name));
     }
 }

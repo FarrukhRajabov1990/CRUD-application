@@ -42,4 +42,11 @@ public class ClassifierMahallaController {
     public ResponseEntity<ResponseData<Boolean>> delete(@PathVariable(value = "id") String id) {
         return service.delete(id);
     }
+
+    @GetMapping("/get/all/{name}/{code}/{version}")
+    public ResponseEntity<ResponseData<List<ClassifierMahalla>>> getAllBySimpleQuery(
+            @PathVariable(value = "name") String name, @PathVariable(value = "code") Long code,
+            @PathVariable(value = "version") Long version) {
+        return service.findBySimpleQuery(name, code, version);
+    }
 }

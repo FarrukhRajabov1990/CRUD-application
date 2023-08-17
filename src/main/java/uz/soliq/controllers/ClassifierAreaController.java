@@ -42,4 +42,11 @@ public class ClassifierAreaController {
     public ResponseEntity<ResponseData<Boolean>> delete(@PathVariable(value = "id") String id) {
         return service.delete(id);
     }
+
+    @GetMapping("/get/all/{version}/{areaId}/{regionId}")
+    public ResponseEntity<ResponseData<List<ClassifierArea>>> getAllBySimpleQuery(
+            @PathVariable(value = "version") Long version, @PathVariable(value = "areaId") String areaId,
+            @PathVariable(value = "regionId") String regionId) {
+        return service.findBySimpleQuery(version, areaId, regionId);
+    }
 }

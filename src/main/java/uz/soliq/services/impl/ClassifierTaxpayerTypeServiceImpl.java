@@ -10,6 +10,7 @@ import uz.soliq.exceptions.CustomNotFoundException;
 import uz.soliq.mapper.ClassifierTaxpayerTypeMapper;
 import uz.soliq.repositories.ClassifierTaxPayerTypeRepo;
 import uz.soliq.services.ClassifierTaxpayerTypeService;
+import uz.soliq.specifications.TaxpayerType;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,7 @@ public class ClassifierTaxpayerTypeServiceImpl implements ClassifierTaxpayerType
 
     private final ClassifierTaxPayerTypeRepo repo;
     private final ClassifierTaxpayerTypeMapper mapper;
+    private final TaxpayerType querySearch;
 
     @Override
     public ClassifierTaxpayerType findById(String id) throws CustomNotFoundException {
@@ -61,5 +63,11 @@ public class ClassifierTaxpayerTypeServiceImpl implements ClassifierTaxpayerType
         }
         repo.delete(taxpayerTypeOptional.get());
         return ResponseData.success200(true);
+    }
+
+    @Override
+    public ResponseEntity<ResponseData<List<ClassifierTaxpayerType>>> findBySimpleQuery(
+            String code, String name, Long version) {
+        return ResponseData.success200(querySearch.findAllBySimpleQuery(code, name, version));
     }
 }

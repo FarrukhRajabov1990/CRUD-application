@@ -42,4 +42,11 @@ public class ClassifierArgosCategoryController {
     public ResponseEntity<ResponseData<Boolean>> delete(@PathVariable(value = "id") String id) {
         return service.delete(id);
     }
+    @GetMapping("/get/all/{code}/{name}/{version}")
+    public ResponseEntity<ResponseData<List<ClassifierArgosCategory>>> getAllBySimpleQuery(
+            @PathVariable(value = "code") String code, @PathVariable(value = "name") String name,
+            @PathVariable(value = "version") Long version) {
+        return service.findBySimpleQuery(code, name, version);
+    }
+
 }

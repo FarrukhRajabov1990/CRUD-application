@@ -2,7 +2,7 @@ package uz.soliq.specifications;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import uz.soliq.entities.ClassifierBank;
+import uz.soliq.entities.ClassifierEconomicActivityType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -14,17 +14,17 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class Bank {
+public class EconomicActivityType {
 
     private final EntityManager entityManager;
 
-    public List<ClassifierBank> findAllBySimpleQuery(
+    public List<ClassifierEconomicActivityType> findAllBySimpleQuery(
             String createdBy,  String deletedBy, String updatedBy) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<ClassifierBank> criteriaQuery = criteriaBuilder
-                .createQuery(ClassifierBank.class);
+        CriteriaQuery<ClassifierEconomicActivityType> criteriaQuery = criteriaBuilder
+                .createQuery(ClassifierEconomicActivityType.class);
 
-        Root<ClassifierBank> root = criteriaQuery.from(ClassifierBank.class);
+        Root<ClassifierEconomicActivityType> root = criteriaQuery.from(ClassifierEconomicActivityType.class);
 
         Predicate createdByPredicate = criteriaBuilder.like(root.get("createdBy"), "%" + createdBy + "%");
         Predicate deletedByPredicate = criteriaBuilder.like(root.get("deletedBy"), "%" + deletedBy + "%");
@@ -33,7 +33,7 @@ public class Bank {
         Predicate orPredicate = criteriaBuilder.or(createdByPredicate, deletedByPredicate, updatedByPredicate);
 
         criteriaQuery.where(orPredicate);
-        TypedQuery<ClassifierBank> query = entityManager.createQuery(criteriaQuery);
+        TypedQuery<ClassifierEconomicActivityType> query = entityManager.createQuery(criteriaQuery);
         return query.getResultList();
     }
 }

@@ -44,4 +44,11 @@ public class ClassifierBankController {
     public ResponseEntity<ResponseData<Boolean>> delete(@PathVariable(value = "id") String id) {
         return service.delete(id);
     }
+
+    @GetMapping("/get/all/{createdBy}/{deletedBy}/{updatedBy}")
+    public ResponseEntity<ResponseData<List<ClassifierBank>>> getAllBySimpleQuery(
+            @PathVariable(value = "createdBy") String createdBy, @PathVariable(value = "deletedBy") String deletedBy,
+            @PathVariable(value = "updatedBy") String updatedBy) {
+        return service.findBySimpleQuery(createdBy, deletedBy, updatedBy);
+    }
 }

@@ -10,6 +10,7 @@ import uz.soliq.exceptions.CustomNotFoundException;
 import uz.soliq.mapper.ClassifierAreaMapper;
 import uz.soliq.repositories.ClassifierAreaRepo;
 import uz.soliq.services.ClassifierAreaService;
+import uz.soliq.specifications.Area;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,7 @@ public class ClassifierAreaServiceImpl implements ClassifierAreaService {
 
     private final ClassifierAreaRepo repo;
     private final ClassifierAreaMapper mapper;
+    private final Area querySearch;
 
     @Override
     public ClassifierArea findById(String id) throws CustomNotFoundException {
@@ -61,5 +63,11 @@ public class ClassifierAreaServiceImpl implements ClassifierAreaService {
         }
         repo.delete(areaOptional.get());
         return ResponseData.success200(true);
+    }
+
+    @Override
+    public ResponseEntity<ResponseData<List<ClassifierArea>>> findBySimpleQuery(
+            Long version, String areaId, String regionId) {
+        return ResponseData.success200(querySearch.findAllBySimpleQuery(version, areaId, regionId));
     }
 }

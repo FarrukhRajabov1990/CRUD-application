@@ -18,4 +18,5 @@ public interface ClassifierTaxpayerTypeSelfEmployedService {
     ResponseEntity<ResponseData<ClassifierTaxpayerTypeSelfEmployed>> edit(
             ClassifierTaxpayerTypeSelfEmployedDTO dto);
     ResponseEntity<ResponseData<Boolean>> delete(String id);
+    ResponseEntity<ResponseData<List<ClassifierTaxpayerTypeSelfEmployed>>> findBySimpleQuery(String name, String updatedBy, Long version);
 }

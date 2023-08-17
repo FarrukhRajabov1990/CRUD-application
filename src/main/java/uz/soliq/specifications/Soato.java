@@ -2,7 +2,7 @@ package uz.soliq.specifications;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import uz.soliq.entities.ClassifierArea;
+import uz.soliq.entities.ClassifierSoato;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -14,26 +14,26 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class Area {
+public class Soato {
 
     private final EntityManager entityManager;
 
-    public List<ClassifierArea> findAllBySimpleQuery(
-            Long version, String areaId, String regionId) {
+    public List<ClassifierSoato> findAllBySimpleQuery(
+            String createdBy, String deletedBy, String name) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<ClassifierArea> criteriaQuery = criteriaBuilder
-                .createQuery(ClassifierArea.class);
+        CriteriaQuery<ClassifierSoato> criteriaQuery = criteriaBuilder
+                .createQuery(ClassifierSoato.class);
 
-        Root<ClassifierArea> root = criteriaQuery.from(ClassifierArea.class);
+        Root<ClassifierSoato> root = criteriaQuery.from(ClassifierSoato.class);
 
-        Predicate versionPredicate = criteriaBuilder.equal(root.get("version"), version);
-        Predicate namePredicate = criteriaBuilder.like(root.get("name"), "%" + areaId + "%");
-        Predicate regionIdPredicate = criteriaBuilder.like(root.get("name"), "%" + regionId + "%");
+        Predicate createdByPredicate = criteriaBuilder.like(root.get("createdBy"), "%" + createdBy + "%");
+        Predicate deletedByPredicate = criteriaBuilder.like(root.get("deletedBy"), "%" + deletedBy + "%");
+        Predicate namePredicate = criteriaBuilder.like(root.get("name"), "%" + name + "%");
 
-        Predicate orPredicate = criteriaBuilder.or(versionPredicate, namePredicate, regionIdPredicate);
+        Predicate orPredicate = criteriaBuilder.or(createdByPredicate, deletedByPredicate, namePredicate);
 
         criteriaQuery.where(orPredicate);
-        TypedQuery<ClassifierArea> query = entityManager.createQuery(criteriaQuery);
+        TypedQuery<ClassifierSoato> query = entityManager.createQuery(criteriaQuery);
         return query.getResultList();
     }
 }

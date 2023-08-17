@@ -10,6 +10,7 @@ import uz.soliq.exceptions.CustomNotFoundException;
 import uz.soliq.mapper.ClassifierIndividualEntrepreneurActivityTypeMapper;
 import uz.soliq.repositories.ClassifierIndividualEntrepreneurActivityTypeRepo;
 import uz.soliq.services.ClassifierIndividualEntrepreneurActivityTypeService;
+import uz.soliq.specifications.IndividualEntrepreneurActivityType;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +23,7 @@ public class ClassifierIndividualEntrepreneurActivityTypeServiceImpl
 
     private final ClassifierIndividualEntrepreneurActivityTypeRepo repo;
     private final ClassifierIndividualEntrepreneurActivityTypeMapper mapper;
+    private final IndividualEntrepreneurActivityType querySearch;
 
     @Override
     public ClassifierIndividualEntrepreneurActivityType findById(String id) throws CustomNotFoundException {
@@ -65,5 +67,11 @@ public class ClassifierIndividualEntrepreneurActivityTypeServiceImpl
         }
         repo.delete(typeOptional.get());
         return ResponseData.success200(true);
+    }
+
+    @Override
+    public ResponseEntity<ResponseData<List<ClassifierIndividualEntrepreneurActivityType>>> findBySimpleQuery(
+            String code, String name, Long version) {
+        return ResponseData.success200(querySearch.findAllBySimpleQuery(code, name, version));
     }
 }

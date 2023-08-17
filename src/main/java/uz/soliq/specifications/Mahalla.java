@@ -2,7 +2,7 @@ package uz.soliq.specifications;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import uz.soliq.entities.ClassifierTaxpayerType;
+import uz.soliq.entities.ClassifierMahalla;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -14,26 +14,26 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class TaxpayerType {
+public class Mahalla {
 
     private final EntityManager entityManager;
 
-    public List<ClassifierTaxpayerType> findAllBySimpleQuery(
-            String code, String name, Long version ) {
+    public List<ClassifierMahalla> findAllBySimpleQuery(
+            String name, Long code, Long version) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<ClassifierTaxpayerType> criteriaQuery = criteriaBuilder
-                .createQuery(ClassifierTaxpayerType.class);
+        CriteriaQuery<ClassifierMahalla> criteriaQuery = criteriaBuilder
+                .createQuery(ClassifierMahalla.class);
 
-        Root<ClassifierTaxpayerType> root = criteriaQuery.from(ClassifierTaxpayerType.class);
+        Root<ClassifierMahalla> root = criteriaQuery.from(ClassifierMahalla.class);
 
-        Predicate codePredicate = criteriaBuilder.equal(root.get("code"), code);
         Predicate namePredicate = criteriaBuilder.like(root.get("name"), "%" + name + "%");
+        Predicate codePredicate = criteriaBuilder.equal(root.get("code"), code);
         Predicate versionPredicate = criteriaBuilder.equal(root.get("version"), version);
 
-        Predicate orPredicate = criteriaBuilder.or(codePredicate, namePredicate, versionPredicate);
+        Predicate orPredicate = criteriaBuilder.or(namePredicate, codePredicate, versionPredicate);
 
         criteriaQuery.where(orPredicate);
-        TypedQuery<ClassifierTaxpayerType> query = entityManager.createQuery(criteriaQuery);
+        TypedQuery<ClassifierMahalla> query = entityManager.createQuery(criteriaQuery);
         return query.getResultList();
     }
 }

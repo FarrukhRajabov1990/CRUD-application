@@ -4,37 +4,37 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.soliq.common.ResponseData;
-import uz.soliq.dto.ClassifierArgosCategoryDTO;
-import uz.soliq.entities.ClassifierArgosCategory;
+import uz.soliq.dto.ClassifierProductDTO;
+import uz.soliq.entities.ClassifierProduct;
 import uz.soliq.exceptions.CustomNotFoundException;
-import uz.soliq.services.ClassifierArgosCategoryService;
+import uz.soliq.services.ClassifierProductService;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/classifierArgosCategory")
-public class ClassifierArgosCategoryController {
+@RequestMapping("/classifierProduct")
+public class ClassifierProductController {
 
-    private final ClassifierArgosCategoryService service;
+    private final ClassifierProductService service;
 
     @GetMapping("/get/all")
-    public ResponseEntity<ResponseData<List<ClassifierArgosCategory>>> getAll() {
+    public ResponseEntity<ResponseData<List<ClassifierProduct>>> getAll() {
         return service.getAll();
     }
 
     @GetMapping("/get/{id}")
-    public ClassifierArgosCategory get(@PathVariable(value = "id") String id) throws CustomNotFoundException {
+    public ClassifierProduct get(@PathVariable(value = "id") String id) throws CustomNotFoundException {
         return service.findById(id);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<ResponseData<ClassifierArgosCategory>> add(@RequestBody ClassifierArgosCategoryDTO dto) {
+    public ResponseEntity<ResponseData<ClassifierProduct>> add(@RequestBody ClassifierProductDTO dto) {
         return service.add(dto);
     }
 
     @PutMapping("/edit")
-    public ResponseEntity<ResponseData<ClassifierArgosCategory>> edit(@RequestBody ClassifierArgosCategoryDTO dto) {
+    public ResponseEntity<ResponseData<ClassifierProduct>> edit(@RequestBody ClassifierProductDTO dto) {
         return service.edit(dto);
     }
 
@@ -42,11 +42,12 @@ public class ClassifierArgosCategoryController {
     public ResponseEntity<ResponseData<Boolean>> delete(@PathVariable(value = "id") String id) {
         return service.delete(id);
     }
-    @GetMapping("/get/all/{code}/{name}/{version}")
-    public ResponseEntity<ResponseData<List<ClassifierArgosCategory>>> getAllBySimpleQuery(
-            @PathVariable(value = "code") String code, @PathVariable(value = "name") String name,
-            @PathVariable(value = "version") Long version) {
-        return service.findBySimpleQuery(code, name, version);
+
+    @GetMapping("/get/all/{createdBy}/{deletedBy}/{section}")
+    public ResponseEntity<ResponseData<List<ClassifierProduct>>> getAllBySimpleQuery(
+            @PathVariable(value = "createdBy") String createdBy, @PathVariable(value = "deletedBy") String deletedBy,
+            @PathVariable(value = "section") String section) {
+        return service.findBySimpleQuery(createdBy, deletedBy, section);
     }
 
 }

@@ -10,6 +10,7 @@ import uz.soliq.exceptions.CustomNotFoundException;
 import uz.soliq.mapper.ClassifierTaxpayerTypeSelfEmployedMapper;
 import uz.soliq.repositories.ClassifierTaxpayerTypeSelfEmployedRepo;
 import uz.soliq.services.ClassifierTaxpayerTypeSelfEmployedService;
+import uz.soliq.specifications.TaxpayerTypeSelfEmployed;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +22,7 @@ public class ClassifierTaxpayerTypeSelfEmployedServiceImpl implements
 
     private final ClassifierTaxpayerTypeSelfEmployedRepo repo;
     private final ClassifierTaxpayerTypeSelfEmployedMapper mapper;
+    private final TaxpayerTypeSelfEmployed querySearch;
 
 
     @Override
@@ -65,5 +67,11 @@ public class ClassifierTaxpayerTypeSelfEmployedServiceImpl implements
         }
         repo.delete(employedOptional.get());
         return ResponseData.success200(true);
+    }
+
+    @Override
+    public ResponseEntity<ResponseData<List<ClassifierTaxpayerTypeSelfEmployed>>> findBySimpleQuery(
+            String name, String updatedBy, Long version) {
+        return ResponseData.success200(querySearch.findAllBySimpleQuery(name, updatedBy, version));
     }
 }

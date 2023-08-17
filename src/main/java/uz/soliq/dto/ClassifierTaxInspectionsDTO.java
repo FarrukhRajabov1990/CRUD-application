@@ -13,7 +13,7 @@ import lombok.Setter;
 public class ClassifierTaxInspectionsDTO {
 
     @JsonProperty("id")
-    protected String id;
+    private String id;
 
     @JsonProperty("ns10Code")
     private Integer ns10Code;

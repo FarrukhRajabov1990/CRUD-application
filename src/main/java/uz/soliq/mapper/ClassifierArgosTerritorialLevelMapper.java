@@ -2,11 +2,11 @@ package uz.soliq.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import uz.soliq.dto.ClassifierArgosCategoryDTO;
-import uz.soliq.entities.ClassifierArgosCategory;
+import uz.soliq.dto.ClassifierArgosTerritorialLevelDTO;
+import uz.soliq.entities.ClassifierArgosTerritorialLevel;
 
 @Mapper(componentModel = "spring")
-public interface ClassifierArgosCategoryMapper {
+public interface ClassifierArgosTerritorialLevelMapper {
 
     @Mapping(target = "id", source = "id")
     @Mapping(target = "code", source = "code")
@@ -21,6 +21,5 @@ public interface ClassifierArgosCategoryMapper {
     @Mapping(target = "updateTs", ignore = true)
     @Mapping(target = "updatedBy", source = "updatedBy")
     @Mapping(target = "version", source = "version")
-    @Mapping(target = "letter", source = "letter")
-    ClassifierArgosCategory toEntity(ClassifierArgosCategoryDTO dto);
+    ClassifierArgosTerritorialLevel toEntity(ClassifierArgosTerritorialLevelDTO dto);
 }

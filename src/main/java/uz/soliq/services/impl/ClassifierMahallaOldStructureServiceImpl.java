@@ -5,11 +5,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import uz.soliq.common.ResponseData;
 import uz.soliq.dto.ClassifierMahallaOldStructureDTO;
+import uz.soliq.entities.ClassifierGender;
 import uz.soliq.entities.ClassifierMahallaOldStructure;
 import uz.soliq.exceptions.CustomNotFoundException;
 import uz.soliq.mapper.ClassifierMahallaOldStructureMapper;
 import uz.soliq.repositories.ClassifierMahallaOldStructureRepo;
 import uz.soliq.services.ClassifierMahallaOldStructureService;
+import uz.soliq.specifications.GenderSearch;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +22,7 @@ public class ClassifierMahallaOldStructureServiceImpl implements ClassifierMahal
 
     private final ClassifierMahallaOldStructureRepo repo;
     private final ClassifierMahallaOldStructureMapper mapper;
+    private final GenderSearch querySearch;
 
     @Override
     public ClassifierMahallaOldStructure findById(String id) throws CustomNotFoundException {
@@ -61,5 +64,11 @@ public class ClassifierMahallaOldStructureServiceImpl implements ClassifierMahal
         }
         repo.delete(oldStructureOptional.get());
         return ResponseData.success200(true);
+    }
+
+    @Override
+    public ResponseEntity<ResponseData<List<ClassifierGender>>> findBySimpleQuery(
+            Integer code, String name, Long version) {
+        return ResponseData.success200(querySearch.findAllBySimpleQuery(code, name, version));
     }
 }

@@ -22,13 +22,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "CLASSIFIER_AREA")
-public class ClassifierArea implements Serializable {
+@Table(name = "CLASSIFIER_ZIP_CODE")
+public class ClassifierZipCode implements Serializable {
 
     @Id
     @Size(max = 255, message = "Id is too long")
     @Column(name = "ID", unique = true)
     private String id;
+
+    @Size(max = 255, message = "Code is too long")
+    @Column(name = "CODE", nullable = false)
+    private String code;
 
     @JsonIgnore
     @JsonIgnoreProperties
@@ -68,16 +72,4 @@ public class ClassifierArea implements Serializable {
 
     @Column(name = "VERSION", nullable = false)
     private Long version;
-
-    @Size(max = 255, message = "Too long")
-    @Column(name = "ADMINISTRATIVE_CENTER_ID")
-    private String administrativeCenterId;
-
-    @Size(max = 255, message = "Too long")
-    @Column(name = "AREA_ID", nullable = false)
-    private String areaId;
-
-    @Size(max = 255, message = "Too long")
-    @Column(name = "REGION_ID", nullable = false)
-    private String regionId;
 }

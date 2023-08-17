@@ -2,7 +2,7 @@ package uz.soliq.specifications;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import uz.soliq.entities.ClassifierGender;
+import uz.soliq.entities.ClassifierArgosCategory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -14,16 +14,17 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class GenderSearch {
+public class ArgosCategory {
 
     private final EntityManager entityManager;
 
-    public List<ClassifierGender> findAllBySimpleQuery(
-            Integer code, String name, Long version ) {
+    public List<ClassifierArgosCategory> findAllBySimpleQuery(
+            String code, String name, Long version ) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<ClassifierGender> criteriaQuery = criteriaBuilder.createQuery(ClassifierGender.class);
+        CriteriaQuery<ClassifierArgosCategory> criteriaQuery = criteriaBuilder
+                .createQuery(ClassifierArgosCategory.class);
 
-        Root<ClassifierGender> root = criteriaQuery.from(ClassifierGender.class);
+        Root<ClassifierArgosCategory> root = criteriaQuery.from(ClassifierArgosCategory.class);
 
         Predicate codePredicate = criteriaBuilder.equal(root.get("code"), code);
         Predicate namePredicate = criteriaBuilder.like(root.get("name"), "%" + name + "%");
@@ -32,7 +33,7 @@ public class GenderSearch {
         Predicate orPredicate = criteriaBuilder.or(codePredicate, namePredicate, versionPredicate);
 
         criteriaQuery.where(orPredicate);
-        TypedQuery<ClassifierGender> query = entityManager.createQuery(criteriaQuery);
+        TypedQuery<ClassifierArgosCategory> query = entityManager.createQuery(criteriaQuery);
         return query.getResultList();
     }
 }

@@ -2,7 +2,7 @@ package uz.soliq.specifications;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import uz.soliq.entities.ClassifierGender;
+import uz.soliq.entities.ClassifierMahallaOldStructure;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -14,16 +14,17 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class GenderSearch {
+public class MahallaOldStructure {
 
     private final EntityManager entityManager;
 
-    public List<ClassifierGender> findAllBySimpleQuery(
-            Integer code, String name, Long version ) {
+    public List<ClassifierMahallaOldStructure> findAllBySimpleQuery(
+            String name, Integer code, Long version) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<ClassifierGender> criteriaQuery = criteriaBuilder.createQuery(ClassifierGender.class);
+        CriteriaQuery<ClassifierMahallaOldStructure> criteriaQuery = criteriaBuilder
+                .createQuery(ClassifierMahallaOldStructure.class);
 
-        Root<ClassifierGender> root = criteriaQuery.from(ClassifierGender.class);
+        Root<ClassifierMahallaOldStructure> root = criteriaQuery.from(ClassifierMahallaOldStructure.class);
 
         Predicate codePredicate = criteriaBuilder.equal(root.get("code"), code);
         Predicate namePredicate = criteriaBuilder.like(root.get("name"), "%" + name + "%");
@@ -32,7 +33,7 @@ public class GenderSearch {
         Predicate orPredicate = criteriaBuilder.or(codePredicate, namePredicate, versionPredicate);
 
         criteriaQuery.where(orPredicate);
-        TypedQuery<ClassifierGender> query = entityManager.createQuery(criteriaQuery);
+        TypedQuery<ClassifierMahallaOldStructure> query = entityManager.createQuery(criteriaQuery);
         return query.getResultList();
     }
 }

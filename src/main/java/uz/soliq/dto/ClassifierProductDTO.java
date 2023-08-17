@@ -10,13 +10,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClassifierArgosTerritorialLevelDTO {
+public class ClassifierProductDTO {
 
     @JsonProperty("id")
     private String id;
-
-    @JsonProperty("code")
-    private String code;
 
     @JsonProperty("createdBy")
     private String createdBy;
@@ -36,9 +33,33 @@ public class ClassifierArgosTerritorialLevelDTO {
     @JsonProperty("nameUzLatn")
     private String nameUzLatn;
 
+    @JsonProperty("productClass")
+    private String productClass;
+
+    @JsonProperty("productDivision")
+    private String productDivision;
+
+    @JsonProperty("productGroup")
+    private String productGroup;
+
+    @JsonProperty("productRank")
+    private String productRank;
+
+    @JsonProperty("productSubrank")
+    private String productSubrank;
+
+    @JsonProperty("productType")
+    private String productType;
+
+    @JsonProperty("section")
+    private String section;
+
     @JsonProperty("updatedBy")
     private String updatedBy;
 
     @JsonProperty("version")
     private Long version;
+
+    @JsonProperty("parentId")
+    private Long parentId;
 }

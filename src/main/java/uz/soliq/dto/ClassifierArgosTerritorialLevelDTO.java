@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClassifierArgosCategoryDTO {
+public class ClassifierArgosTerritorialLevelDTO {
 
     @JsonProperty("id")
     private String id;
@@ -41,7 +41,4 @@ public class ClassifierArgosCategoryDTO {
 
     @JsonProperty("version")
     private Long version;
-
-    @JsonProperty("letter")
-    private Character letter;
 }

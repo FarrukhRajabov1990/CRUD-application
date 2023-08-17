@@ -16,8 +16,8 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "CLASSIFIER_ARGOS_TERRITORIAL_LEVEL")
-public class ClassifierArgosTerritorialLevel extends BaseEntity {
+@Table(name = "CLASSIFIER_RELATION_DEGREE")
+public class ClassifierRelationDegree extends BaseEntity {
 
     @Size(max = 255, message = "It is long")
     @Column(name = "CODE", nullable = false)

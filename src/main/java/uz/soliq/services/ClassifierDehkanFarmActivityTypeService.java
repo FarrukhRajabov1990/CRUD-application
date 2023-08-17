@@ -16,4 +16,5 @@ public interface ClassifierDehkanFarmActivityTypeService {
     ResponseEntity<ResponseData<ClassifierDehkanFarmActivityType>> add(ClassifierDehkanFarmActivityTypeDTO dto);
     ResponseEntity<ResponseData<ClassifierDehkanFarmActivityType>> edit(ClassifierDehkanFarmActivityTypeDTO dto);
     ResponseEntity<ResponseData<Boolean>> delete(String id);
+    ResponseEntity<ResponseData<List<ClassifierDehkanFarmActivityType>>> findBySimpleQuery(String code, String name, String updatedBy);
 }

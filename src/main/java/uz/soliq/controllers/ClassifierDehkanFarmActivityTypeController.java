@@ -46,4 +46,11 @@ public class ClassifierDehkanFarmActivityTypeController {
     public ResponseEntity<ResponseData<Boolean>> delete(@PathVariable(value = "id") String id) {
         return service.delete(id);
     }
+
+    @GetMapping("/get/all/{code}/{name}/{updatedBy}")
+    public ResponseEntity<ResponseData<List<ClassifierDehkanFarmActivityType>>> getAllBySimpleQuery(
+            @PathVariable(value = "code") String code, @PathVariable(value = "name") String name,
+            @PathVariable(value = "updatedBy") String updatedBy) {
+        return service.findBySimpleQuery(code, name, updatedBy);
+    }
 }

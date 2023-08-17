@@ -10,6 +10,7 @@ import uz.soliq.exceptions.CustomNotFoundException;
 import uz.soliq.mapper.ClassifierBankPurposeMapper;
 import uz.soliq.repositories.ClassifierBankPurposeRepo;
 import uz.soliq.services.ClassifierBankPurposeService;
+import uz.soliq.specifications.BankPurpose;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,7 @@ public class ClassifierBankPurposeServiceImpl implements ClassifierBankPurposeSe
 
     private final ClassifierBankPurposeRepo repo;
     private final ClassifierBankPurposeMapper mapper;
+    private final BankPurpose querySearch;
 
     @Override
     public ClassifierBankPurpose findById(String id) throws CustomNotFoundException {
@@ -61,5 +63,11 @@ public class ClassifierBankPurposeServiceImpl implements ClassifierBankPurposeSe
         }
         repo.delete(bankPurposeOptional.get());
         return ResponseData.success200(true);
+    }
+
+    @Override
+    public ResponseEntity<ResponseData<List<ClassifierBankPurpose>>> findBySimpleQuery(
+            String name, String updatedBy, Long version) {
+        return ResponseData.success200(querySearch.findAllBySimpleQuery(name, updatedBy, version));
     }
 }

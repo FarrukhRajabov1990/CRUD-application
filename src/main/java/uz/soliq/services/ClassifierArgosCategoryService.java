@@ -15,4 +15,5 @@ public interface ClassifierArgosCategoryService {
     ResponseEntity<ResponseData<ClassifierArgosCategory>> add(ClassifierArgosCategoryDTO dto);
     ResponseEntity<ResponseData<ClassifierArgosCategory>> edit(ClassifierArgosCategoryDTO dto);
     ResponseEntity<ResponseData<Boolean>> delete(String id);
+    ResponseEntity<ResponseData<List<ClassifierArgosCategory>>> findBySimpleQuery(String code, String name, Long version);
 }

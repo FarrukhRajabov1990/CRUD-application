@@ -10,6 +10,7 @@ import uz.soliq.exceptions.CustomNotFoundException;
 import uz.soliq.mapper.ClassifierDehkanFarmActivityTypeMapper;
 import uz.soliq.repositories.ClassifierDehkanFarmActivityTypeRepo;
 import uz.soliq.services.ClassifierDehkanFarmActivityTypeService;
+import uz.soliq.specifications.DehkanFarmActivityType;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +22,7 @@ public class ClassifierDehkanFarmActivityTypeServiceImpl implements ClassifierDe
 
     private final ClassifierDehkanFarmActivityTypeRepo repo;
     private final ClassifierDehkanFarmActivityTypeMapper mapper;
+    private final DehkanFarmActivityType querySearch;
 
     @Override
     public ClassifierDehkanFarmActivityType findById(String id) throws CustomNotFoundException {
@@ -64,5 +66,11 @@ public class ClassifierDehkanFarmActivityTypeServiceImpl implements ClassifierDe
         }
         repo.delete(typeOptional.get());
         return ResponseData.success200(true);
+    }
+
+    @Override
+    public ResponseEntity<ResponseData<List<ClassifierDehkanFarmActivityType>>> findBySimpleQuery(
+            String code, String name, String updatedBy) {
+        return ResponseData.success200(querySearch.findAllBySimpleQuery(code, name, updatedBy));
     }
 }

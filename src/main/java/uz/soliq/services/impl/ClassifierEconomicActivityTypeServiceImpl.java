@@ -4,63 +4,73 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import uz.soliq.common.ResponseData;
-import uz.soliq.dto.ClassifierBankDTO;
-import uz.soliq.entities.ClassifierBank;
+import uz.soliq.dto.ClassifierEconomicActivityTypeDTO;
+import uz.soliq.entities.ClassifierEconomicActivityType;
 import uz.soliq.exceptions.CustomNotFoundException;
-import uz.soliq.mapper.ClassifierBankMapper;
-import uz.soliq.repositories.ClassifierBankRepo;
-import uz.soliq.services.ClassifierBankService;
+import uz.soliq.mapper.ClassifierEconomicActivityTypeMapper;
+import uz.soliq.repositories.ClassifierEconomicActivityTypeRepo;
+import uz.soliq.services.ClassifierEconomicActivityTypeService;
+import uz.soliq.specifications.EconomicActivityType;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ClassifierBankServiceImpl implements ClassifierBankService {
+public class ClassifierEconomicActivityTypeServiceImpl implements ClassifierEconomicActivityTypeService {
 
 
-    private final ClassifierBankRepo repo;
-    private final ClassifierBankMapper mapper;
+    private final ClassifierEconomicActivityTypeRepo repo;
+    private final ClassifierEconomicActivityTypeMapper mapper;
+    private final EconomicActivityType querySearch;
 
     @Override
-    public ClassifierBank findById(String id) throws CustomNotFoundException {
-        Optional<ClassifierBank> bankOptional = repo.findById(id);
-        if (bankOptional.isEmpty()) {
+    public ClassifierEconomicActivityType findById(String id) throws CustomNotFoundException {
+        Optional<ClassifierEconomicActivityType> typeOptional = repo.findById(id);
+        if (typeOptional.isEmpty()) {
             throw new CustomNotFoundException("Not found!");
         }
-        return bankOptional.get();
+        return typeOptional.get();
     }
 
     @Override
-    public ResponseEntity<ResponseData<List<ClassifierBank>>> getAll() {
+    public ResponseEntity<ResponseData<List<ClassifierEconomicActivityType>>> getAll() {
         return ResponseData.success200(repo.findAll());
     }
 
     @Override
-    public ResponseEntity<ResponseData<ClassifierBank>> add(ClassifierBankDTO dto) {
-        ClassifierBank bank = mapper.toEntity(dto);
-        repo.save(bank);
-        return ResponseData.success201(bank);
+    public ResponseEntity<ResponseData<ClassifierEconomicActivityType>> add(
+            ClassifierEconomicActivityTypeDTO dto) {
+        ClassifierEconomicActivityType type = mapper.toEntity(dto);
+        repo.save(type);
+        return ResponseData.success201(type);
     }
 
     @Override
-    public ResponseEntity<ResponseData<ClassifierBank>> edit(ClassifierBankDTO dto) {
-        Optional<ClassifierBank> bankOptional = repo.findById(dto.getId());
-        if (bankOptional.isEmpty()) {
+    public ResponseEntity<ResponseData<ClassifierEconomicActivityType>> edit(
+            ClassifierEconomicActivityTypeDTO dto) {
+        Optional<ClassifierEconomicActivityType> typeOptional = repo.findById(dto.getId());
+        if (typeOptional.isEmpty()) {
             throw new RuntimeException("Not found!");
         }
-        ClassifierBank bank = mapper.toEntity(dto);
-        repo.save(bank);
-        return ResponseData.success201(bank);
+        ClassifierEconomicActivityType type = mapper.toEntity(dto);
+        repo.save(type);
+        return ResponseData.success201(type);
     }
 
     @Override
     public ResponseEntity<ResponseData<Boolean>> delete(String id) {
-        Optional<ClassifierBank> bankOptional = repo.findById(id);
-        if (bankOptional.isEmpty()) {
+        Optional<ClassifierEconomicActivityType> typeOptional = repo.findById(id);
+        if (typeOptional.isEmpty()) {
             throw new RuntimeException("Not found!");
         }
-        repo.delete(bankOptional.get());
+        repo.delete(typeOptional.get());
         return ResponseData.success200(true);
+    }
+
+    @Override
+    public ResponseEntity<ResponseData<List<ClassifierEconomicActivityType>>> findBySimpleQuery(
+            String createdBy,  String deletedBy, String updatedBy) {
+        return ResponseData.success200(querySearch.findAllBySimpleQuery(createdBy, deletedBy, updatedBy));
     }
 }

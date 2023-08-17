@@ -16,4 +16,5 @@ public interface ClassifierSoatoService {
     ResponseEntity<ResponseData<ClassifierSoato>> add(ClassifierSoatoDTO dto);
     ResponseEntity<ResponseData<ClassifierSoato>> edit(ClassifierSoatoDTO dto);
     ResponseEntity<ResponseData<Boolean>> delete(String id);
+    ResponseEntity<ResponseData<List<ClassifierSoato>>> findBySimpleQuery(String createdBy,  String deletedBy, String name);
 }

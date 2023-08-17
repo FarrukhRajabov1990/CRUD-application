@@ -2,7 +2,7 @@ package uz.soliq.specifications;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import uz.soliq.entities.ClassifierBankPurpose;
+import uz.soliq.entities.ClassifierZipCode;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -14,26 +14,26 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class BankPurpose {
+public class ZipCode {
 
     private final EntityManager entityManager;
 
-    public List<ClassifierBankPurpose> findAllBySimpleQuery(
-            String name, String updatedBy, Long version ) {
+    public List<ClassifierZipCode> findAllBySimpleQuery(
+            String createdBy,  String deletedBy, String updatedBy) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<ClassifierBankPurpose> criteriaQuery = criteriaBuilder
-                .createQuery(ClassifierBankPurpose.class);
+        CriteriaQuery<ClassifierZipCode> criteriaQuery = criteriaBuilder
+                .createQuery(ClassifierZipCode.class);
 
-        Root<ClassifierBankPurpose> root = criteriaQuery.from(ClassifierBankPurpose.class);
+        Root<ClassifierZipCode> root = criteriaQuery.from(ClassifierZipCode.class);
 
-        Predicate namePredicate = criteriaBuilder.like(root.get("name"), "%" + name + "%");
+        Predicate createdByPredicate = criteriaBuilder.like(root.get("createdBy"), "%" + createdBy + "%");
+        Predicate deletedByPredicate = criteriaBuilder.like(root.get("deletedBy"), "%" + deletedBy + "%");
         Predicate updatedByPredicate = criteriaBuilder.like(root.get("updatedBy"), "%" + updatedBy + "%");
-        Predicate versionPredicate = criteriaBuilder.equal(root.get("version"), version);
 
-        Predicate orPredicate = criteriaBuilder.or(namePredicate, updatedByPredicate, versionPredicate);
+        Predicate orPredicate = criteriaBuilder.or(createdByPredicate, deletedByPredicate, updatedByPredicate);
 
         criteriaQuery.where(orPredicate);
-        TypedQuery<ClassifierBankPurpose> query = entityManager.createQuery(criteriaQuery);
+        TypedQuery<ClassifierZipCode> query = entityManager.createQuery(criteriaQuery);
         return query.getResultList();
     }
 }

@@ -4,62 +4,70 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import uz.soliq.common.ResponseData;
-import uz.soliq.dto.ClassifierAreaDTO;
-import uz.soliq.entities.ClassifierArea;
+import uz.soliq.dto.ClassifierZipCodeDTO;
+import uz.soliq.entities.ClassifierZipCode;
 import uz.soliq.exceptions.CustomNotFoundException;
-import uz.soliq.mapper.ClassifierAreaMapper;
-import uz.soliq.repositories.ClassifierAreaRepo;
-import uz.soliq.services.ClassifierAreaService;
+import uz.soliq.mapper.ClassifierZipCodeMapper;
+import uz.soliq.repositories.ClassifierZipCodeRepo;
+import uz.soliq.services.ClassifierZipCodeService;
+import uz.soliq.specifications.ZipCode;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ClassifierAreaServiceImpl implements ClassifierAreaService {
+public class ClassifierZipCodeServiceImpl implements ClassifierZipCodeService {
 
-    private final ClassifierAreaRepo repo;
-    private final ClassifierAreaMapper mapper;
+    private final ClassifierZipCodeRepo repo;
+    private final ClassifierZipCodeMapper mapper;
+    private final ZipCode querySearch;
 
     @Override
-    public ClassifierArea findById(String id) throws CustomNotFoundException {
-        Optional<ClassifierArea> areaOptional = repo.findById(id);
-        if (areaOptional.isEmpty()) {
+    public ClassifierZipCode findById(String id) throws CustomNotFoundException {
+        Optional<ClassifierZipCode> zipCodeOptional = repo.findById(id);
+        if (zipCodeOptional.isEmpty()) {
             throw new CustomNotFoundException("Not found!");
         }
-        return areaOptional.get();
+        return zipCodeOptional.get();
     }
 
     @Override
-    public ResponseEntity<ResponseData<List<ClassifierArea>>> getAll() {
+    public ResponseEntity<ResponseData<List<ClassifierZipCode>>> getAll() {
         return ResponseData.success200(repo.findAll());
     }
 
     @Override
-    public ResponseEntity<ResponseData<ClassifierArea>> add(ClassifierAreaDTO dto) {
-        ClassifierArea area = mapper.toEntity(dto);
-        repo.save(area);
-        return ResponseData.success201(area);
+    public ResponseEntity<ResponseData<ClassifierZipCode>> add(ClassifierZipCodeDTO dto) {
+        ClassifierZipCode zipCode = mapper.toEntity(dto);
+        repo.save(zipCode);
+        return ResponseData.success201(zipCode);
     }
 
     @Override
-    public ResponseEntity<ResponseData<ClassifierArea>> edit(ClassifierAreaDTO dto) {
-        Optional<ClassifierArea> areaOptional = repo.findById(dto.getId());
-        if (areaOptional.isEmpty()) {
+    public ResponseEntity<ResponseData<ClassifierZipCode>> edit(ClassifierZipCodeDTO dto) {
+        Optional<ClassifierZipCode> zipCodeOptional = repo.findById(dto.getId());
+        if (zipCodeOptional.isEmpty()) {
             throw new RuntimeException("Not found!");
         }
-        ClassifierArea area = mapper.toEntity(dto);
-        repo.save(area);
-        return ResponseData.success201(area);
+        ClassifierZipCode zipCode = mapper.toEntity(dto);
+        repo.save(zipCode);
+        return ResponseData.success201(zipCode);
     }
 
     @Override
     public ResponseEntity<ResponseData<Boolean>> delete(String id) {
-        Optional<ClassifierArea> areaOptional = repo.findById(id);
-        if (areaOptional.isEmpty()) {
+        Optional<ClassifierZipCode> zipCodeOptional = repo.findById(id);
+        if (zipCodeOptional.isEmpty()) {
             throw new RuntimeException("Not found!");
         }
-        repo.delete(areaOptional.get());
+        repo.delete(zipCodeOptional.get());
         return ResponseData.success200(true);
+    }
+
+    @Override
+    public ResponseEntity<ResponseData<List<ClassifierZipCode>>> findBySimpleQuery(
+            String createdBy,  String deletedBy, String updatedBy) {
+        return ResponseData.success200(querySearch.findAllBySimpleQuery(createdBy, deletedBy, updatedBy));
     }
 }

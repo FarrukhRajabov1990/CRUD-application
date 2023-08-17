@@ -4,62 +4,72 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import uz.soliq.common.ResponseData;
-import uz.soliq.dto.ClassifierArgosCategoryDTO;
-import uz.soliq.entities.ClassifierArgosCategory;
+import uz.soliq.dto.ClassifierArgosTerritorialLevelDTO;
+import uz.soliq.entities.ClassifierArgosTerritorialLevel;
 import uz.soliq.exceptions.CustomNotFoundException;
-import uz.soliq.mapper.ClassifierArgosCategoryMapper;
-import uz.soliq.repositories.ClassifierArgosCategoryRepo;
-import uz.soliq.services.ClassifierArgosCategoryService;
+import uz.soliq.mapper.ClassifierArgosTerritorialLevelMapper;
+import uz.soliq.repositories.ClassifierArgosTerritorialLevelRepo;
+import uz.soliq.services.ClassifierArgosTerritorialLevelService;
+import uz.soliq.specifications.ArgosTerritorialLevel;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ClassifierArgosCategoryServiceImpl implements ClassifierArgosCategoryService {
+public class ClassifierArgosTerritorialLevelServiceImpl implements ClassifierArgosTerritorialLevelService {
 
-    private final ClassifierArgosCategoryRepo repo;
-    private final ClassifierArgosCategoryMapper mapper;
+    private final ClassifierArgosTerritorialLevelRepo repo;
+    private final ClassifierArgosTerritorialLevelMapper mapper;
+    private final ArgosTerritorialLevel querySearch;
 
     @Override
-    public ClassifierArgosCategory findById(String id) throws CustomNotFoundException {
-        Optional<ClassifierArgosCategory> category = repo.findById(id);
-        if (category.isEmpty()) {
+    public ClassifierArgosTerritorialLevel findById(String id) throws CustomNotFoundException {
+        Optional<ClassifierArgosTerritorialLevel> level = repo.findById(id);
+        if (level.isEmpty()) {
             throw new CustomNotFoundException("Not found!");
         }
-        return category.get();
+        return level.get();
     }
 
     @Override
-    public ResponseEntity<ResponseData<List<ClassifierArgosCategory>>> getAll() {
+    public ResponseEntity<ResponseData<List<ClassifierArgosTerritorialLevel>>> getAll() {
         return ResponseData.success200(repo.findAll());
     }
 
     @Override
-    public ResponseEntity<ResponseData<ClassifierArgosCategory>> add(ClassifierArgosCategoryDTO dto) {
-        ClassifierArgosCategory argosCategory = mapper.toEntity(dto);
-        repo.save(argosCategory);
-        return ResponseData.success201(argosCategory);
+    public ResponseEntity<ResponseData<ClassifierArgosTerritorialLevel>> add(
+            ClassifierArgosTerritorialLevelDTO dto) {
+        ClassifierArgosTerritorialLevel level = mapper.toEntity(dto);
+        repo.save(level);
+        return ResponseData.success201(level);
     }
 
     @Override
-    public ResponseEntity<ResponseData<ClassifierArgosCategory>> edit(ClassifierArgosCategoryDTO dto) {
-        Optional<ClassifierArgosCategory> category = repo.findById(dto.getId());
-        if (category.isEmpty()) {
+    public ResponseEntity<ResponseData<ClassifierArgosTerritorialLevel>> edit(
+            ClassifierArgosTerritorialLevelDTO dto) {
+        Optional<ClassifierArgosTerritorialLevel> levelOptional = repo.findById(dto.getId());
+        if (levelOptional.isEmpty()) {
             throw new RuntimeException("Not found!");
         }
-        ClassifierArgosCategory classifierArgosCategory = mapper.toEntity(dto);
-        repo.save(classifierArgosCategory);
-        return ResponseData.success201(classifierArgosCategory);
+        ClassifierArgosTerritorialLevel level = mapper.toEntity(dto);
+        repo.save(level);
+        return ResponseData.success201(level);
     }
 
     @Override
     public ResponseEntity<ResponseData<Boolean>> delete(String id) {
-        Optional<ClassifierArgosCategory> category = repo.findById(id);
-        if (category.isEmpty()) {
+        Optional<ClassifierArgosTerritorialLevel> level = repo.findById(id);
+        if (level.isEmpty()) {
             throw new RuntimeException("Not found!");
         }
-        repo.delete(category.get());
+        repo.delete(level.get());
         return ResponseData.success200(true);
+    }
+
+    @Override
+    public ResponseEntity<ResponseData<List<ClassifierArgosTerritorialLevel>>> findBySimpleQuery(
+            String createdBy,  String deletedBy, String updatedBy) {
+        return ResponseData.success200(querySearch.findAllBySimpleQuery(createdBy, deletedBy, updatedBy));
     }
 }

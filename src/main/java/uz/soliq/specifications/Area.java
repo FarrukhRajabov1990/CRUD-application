@@ -2,7 +2,7 @@ package uz.soliq.specifications;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import uz.soliq.entities.ClassifierArgosCategory;
+import uz.soliq.entities.ClassifierArea;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -14,26 +14,26 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class ArgosCategory {
+public class Area {
 
     private final EntityManager entityManager;
 
-    public List<ClassifierArgosCategory> findAllBySimpleQuery(
-            String code, String name, Long version ) {
+    public List<ClassifierArea> findAllBySimpleQuery(
+            Long version, String areaId, String regionId) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<ClassifierArgosCategory> criteriaQuery = criteriaBuilder
-                .createQuery(ClassifierArgosCategory.class);
+        CriteriaQuery<ClassifierArea> criteriaQuery = criteriaBuilder
+                .createQuery(ClassifierArea.class);
 
-        Root<ClassifierArgosCategory> root = criteriaQuery.from(ClassifierArgosCategory.class);
+        Root<ClassifierArea> root = criteriaQuery.from(ClassifierArea.class);
 
-        Predicate codePredicate = criteriaBuilder.equal(root.get("code"), code);
-        Predicate namePredicate = criteriaBuilder.like(root.get("name"), "%" + name + "%");
         Predicate versionPredicate = criteriaBuilder.equal(root.get("version"), version);
+        Predicate namePredicate = criteriaBuilder.like(root.get("name"), "%" + areaId + "%");
+        Predicate regionIdPredicate = criteriaBuilder.like(root.get("name"), "%" + regionId + "%");
 
-        Predicate orPredicate = criteriaBuilder.or(codePredicate, namePredicate, versionPredicate);
+        Predicate orPredicate = criteriaBuilder.or(versionPredicate, namePredicate, regionIdPredicate);
 
         criteriaQuery.where(orPredicate);
-        TypedQuery<ClassifierArgosCategory> query = entityManager.createQuery(criteriaQuery);
+        TypedQuery<ClassifierArea> query = entityManager.createQuery(criteriaQuery);
         return query.getResultList();
     }
 }

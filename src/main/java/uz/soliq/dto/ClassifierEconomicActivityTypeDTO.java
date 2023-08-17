@@ -10,14 +10,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClassifierIndividualEntrepreneurActivityTypeDTO {
+public class ClassifierEconomicActivityTypeDTO {
 
 
     @JsonProperty("id")
     private String id;
 
-    @JsonProperty("code")
-    private String code;
+    @JsonProperty("class_")
+    private String class_;
 
     @JsonProperty("createdBy")
     private String createdBy;
@@ -25,20 +25,11 @@ public class ClassifierIndividualEntrepreneurActivityTypeDTO {
     @JsonProperty("deletedBy")
     private String deletedBy;
 
+    @JsonProperty("division")
+    private String division;
+
     @JsonProperty("group")
     private String group;
-
-    @JsonProperty("groupNumber")
-    private String groupNumber;
-
-    @JsonProperty("groupRu")
-    private String groupRu;
-
-    @JsonProperty("groupUzCyrl")
-    private String groupUzCyrl;
-
-    @JsonProperty("groupUzLatn")
-    private String groupUzLatn;
 
     @JsonProperty("name")
     private String name;
@@ -52,9 +43,18 @@ public class ClassifierIndividualEntrepreneurActivityTypeDTO {
     @JsonProperty("nameUzLatn")
     private String nameUzLatn;
 
+    @JsonProperty("section")
+    private String section;
+
+    @JsonProperty("subclass")
+    private String subclass;
+
     @JsonProperty("updatedBy")
     private String updatedBy;
 
     @JsonProperty("version")
     private Long version;
+
+    @JsonProperty("parentId")
+    private String parentId;
 }

@@ -15,4 +15,5 @@ public interface ClassifierMahallaService {
     ResponseEntity<ResponseData<ClassifierMahalla>> add(ClassifierMahallaDTO dto);
     ResponseEntity<ResponseData<ClassifierMahalla>> edit(ClassifierMahallaDTO dto);
     ResponseEntity<ResponseData<Boolean>> delete(String id);
+    ResponseEntity<ResponseData<List<ClassifierMahalla>>> findBySimpleQuery(String name, Long code, Long version);
 }

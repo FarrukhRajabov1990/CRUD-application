@@ -9,15 +9,17 @@ import uz.soliq.base.BaseEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "CLASSIFIER_GENDER")
-public class ClassifierAgrosTerritorialLevel extends BaseEntity {
+@Table(name = "CLASSIFIER_ARGOS_TERRITORIAL_LEVEL")
+public class ClassifierArgosTerritorialLevel extends BaseEntity {
 
+    @Size(max = 255, message = "It is long")
     @Column(name = "CODE", nullable = false)
     private String code;
 }

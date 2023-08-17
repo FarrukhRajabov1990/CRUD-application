@@ -3,6 +3,7 @@ package uz.soliq.services;
 import org.springframework.http.ResponseEntity;
 import uz.soliq.common.ResponseData;
 import uz.soliq.dto.ClassifierBusinessTypeDTO;
+import uz.soliq.entities.ClassifierArgosCategory;
 import uz.soliq.entities.ClassifierBusinessType;
 import uz.soliq.exceptions.CustomNotFoundException;
 
@@ -15,4 +16,5 @@ public interface ClassifierBusinessTypeService {
     ResponseEntity<ResponseData<ClassifierBusinessType>> add(ClassifierBusinessTypeDTO dto);
     ResponseEntity<ResponseData<ClassifierBusinessType>> edit(ClassifierBusinessTypeDTO dto);
     ResponseEntity<ResponseData<Boolean>> delete(String id);
+    ResponseEntity<ResponseData<List<ClassifierBusinessType>>> findBySimpleQuery(String name, String updatedBy, Long version);
 }

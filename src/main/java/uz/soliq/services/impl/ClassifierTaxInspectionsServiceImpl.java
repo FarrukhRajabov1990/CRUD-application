@@ -10,6 +10,7 @@ import uz.soliq.exceptions.CustomNotFoundException;
 import uz.soliq.mapper.ClassifierTaxInspectionsMapper;
 import uz.soliq.repositories.ClassifierTaxInspectionsRepo;
 import uz.soliq.services.ClassifierTaxInspectionsService;
+import uz.soliq.specifications.TaxInspections;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,7 @@ public class ClassifierTaxInspectionsServiceImpl implements ClassifierTaxInspect
 
     private final ClassifierTaxInspectionsRepo repo;
     private final ClassifierTaxInspectionsMapper mapper;
+    private final TaxInspections querySearch;
 
     @Override
     public ClassifierTaxInspections findById(String id) throws CustomNotFoundException {
@@ -61,5 +63,11 @@ public class ClassifierTaxInspectionsServiceImpl implements ClassifierTaxInspect
         }
         repo.delete(taxInspectionsOptional.get());
         return ResponseData.success200(true);
+    }
+
+    @Override
+    public ResponseEntity<ResponseData<List<ClassifierTaxInspections>>> findBySimpleQuery(
+            String name, String adres, String account) {
+        return ResponseData.success200(querySearch.findAllBySimpleQuery(name, adres, account));
     }
 }

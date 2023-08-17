@@ -24,7 +24,7 @@ public class ClassifierTaxInspections {
 
     @Id
     @Column(name = "ID", unique = true)
-    protected String id;
+    private String id;
 
     @Column(name = "NS10_CODE", nullable = false)
     private Integer ns10Code;
@@ -133,7 +133,7 @@ public class ClassifierTaxInspections {
     @CreationTimestamp
     @Column(name = "DATE_CONV", columnDefinition = "TIMESTAMP default NOW()", nullable = false, updatable = false)
     @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
-    protected LocalDateTime dateConv;
+    private LocalDateTime dateConv;
 
     @Size(max = 32, message = "Too long")
     @Column(name = "PKEY")

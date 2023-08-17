@@ -18,4 +18,6 @@ public interface ClassifierIndividualEntrepreneurActivityTypeService {
     ResponseEntity<ResponseData<ClassifierIndividualEntrepreneurActivityType>> edit
             (ClassifierIndividualEntrepreneurActivityTypeDTO dto);
     ResponseEntity<ResponseData<Boolean>> delete(String id);
+    ResponseEntity<ResponseData<List<ClassifierIndividualEntrepreneurActivityType>>> findBySimpleQuery(
+            String code, String name, Long version);
 }

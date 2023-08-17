@@ -42,4 +42,11 @@ public class ClassifierTaxInspectionsController {
     public ResponseEntity<ResponseData<Boolean>> delete(@PathVariable(value = "id") String id) {
         return service.delete(id);
     }
+
+    @GetMapping("/get/all/{name}/{adres}/{account}")
+    public ResponseEntity<ResponseData<List<ClassifierTaxInspections>>> getAllBySimpleQuery(
+            @PathVariable(value = "name") String name, @PathVariable(value = "adres") String adres,
+            @PathVariable(value = "account") String account) {
+        return service.findBySimpleQuery(name, adres, account);
+    }
 }

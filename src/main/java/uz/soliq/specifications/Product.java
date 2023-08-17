@@ -2,7 +2,7 @@ package uz.soliq.specifications;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import uz.soliq.entities.ClassifierBank;
+import uz.soliq.entities.ClassifierProduct;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -14,26 +14,26 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class Bank {
+public class Product {
 
     private final EntityManager entityManager;
 
-    public List<ClassifierBank> findAllBySimpleQuery(
-            String createdBy,  String deletedBy, String updatedBy) {
+    public List<ClassifierProduct> findAllBySimpleQuery(
+            String createdBy,  String deletedBy, String section) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<ClassifierBank> criteriaQuery = criteriaBuilder
-                .createQuery(ClassifierBank.class);
+        CriteriaQuery<ClassifierProduct> criteriaQuery = criteriaBuilder
+                .createQuery(ClassifierProduct.class);
 
-        Root<ClassifierBank> root = criteriaQuery.from(ClassifierBank.class);
+        Root<ClassifierProduct> root = criteriaQuery.from(ClassifierProduct.class);
 
         Predicate createdByPredicate = criteriaBuilder.like(root.get("createdBy"), "%" + createdBy + "%");
         Predicate deletedByPredicate = criteriaBuilder.like(root.get("deletedBy"), "%" + deletedBy + "%");
-        Predicate updatedByPredicate = criteriaBuilder.like(root.get("updatedBy"), "%" + updatedBy + "%");
+        Predicate sectionPredicate = criteriaBuilder.like(root.get("section"), "%" + section + "%");
 
-        Predicate orPredicate = criteriaBuilder.or(createdByPredicate, deletedByPredicate, updatedByPredicate);
+        Predicate orPredicate = criteriaBuilder.or(createdByPredicate, deletedByPredicate, sectionPredicate);
 
         criteriaQuery.where(orPredicate);
-        TypedQuery<ClassifierBank> query = entityManager.createQuery(criteriaQuery);
+        TypedQuery<ClassifierProduct> query = entityManager.createQuery(criteriaQuery);
         return query.getResultList();
     }
 }

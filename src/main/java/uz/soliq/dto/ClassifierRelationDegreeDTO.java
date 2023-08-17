@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClassifierArgosTerritorialLevelDTO {
+public class ClassifierRelationDegreeDTO {
 
     @JsonProperty("id")
     private String id;

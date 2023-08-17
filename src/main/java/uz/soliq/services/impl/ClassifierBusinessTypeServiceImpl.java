@@ -10,6 +10,7 @@ import uz.soliq.exceptions.CustomNotFoundException;
 import uz.soliq.mapper.ClassifierBusinessTypeMapper;
 import uz.soliq.repositories.ClassifierBusinessTypeRepo;
 import uz.soliq.services.ClassifierBusinessTypeService;
+import uz.soliq.specifications.BusinessType;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,7 @@ public class ClassifierBusinessTypeServiceImpl implements ClassifierBusinessType
 
     private final ClassifierBusinessTypeRepo repo;
     private final ClassifierBusinessTypeMapper mapper;
+    private final BusinessType querySearch;
 
     @Override
     public ClassifierBusinessType findById(String id) throws CustomNotFoundException {
@@ -61,5 +63,11 @@ public class ClassifierBusinessTypeServiceImpl implements ClassifierBusinessType
         }
         repo.delete(businessType.get());
         return ResponseData.success200(true);
+    }
+
+    @Override
+    public ResponseEntity<ResponseData<List<ClassifierBusinessType>>> findBySimpleQuery(
+            String name, String updatedBy, Long version) {
+        return ResponseData.success200(querySearch.findAllBySimpleQuery(name, updatedBy, version));
     }
 }

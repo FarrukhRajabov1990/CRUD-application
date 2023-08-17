@@ -43,4 +43,11 @@ public class ClassifierSoatoController {
     public ResponseEntity<ResponseData<Boolean>> delete(@PathVariable(value = "id") String id) {
         return service.delete(id);
     }
+
+    @GetMapping("/get/all/{createdBy}/{deletedBy}/{name}")
+    public ResponseEntity<ResponseData<List<ClassifierSoato>>> getAllBySimpleQuery(
+            @PathVariable(value = "createdBy") String createdBy, @PathVariable(value = "deletedBy") String deletedBy,
+            @PathVariable(value = "name") String name) {
+        return service.findBySimpleQuery(createdBy, deletedBy, name);
+    }
 }

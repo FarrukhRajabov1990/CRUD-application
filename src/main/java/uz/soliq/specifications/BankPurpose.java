@@ -2,7 +2,7 @@ package uz.soliq.specifications;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import uz.soliq.entities.ClassifierBusinessType;
+import uz.soliq.entities.ClassifierBankPurpose;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -14,17 +14,17 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class BusinessType {
+public class BankPurpose {
 
     private final EntityManager entityManager;
 
-    public List<ClassifierBusinessType> findAllBySimpleQuery(
+    public List<ClassifierBankPurpose> findAllBySimpleQuery(
             String name, String updatedBy, Long version ) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<ClassifierBusinessType> criteriaQuery = criteriaBuilder
-                .createQuery(ClassifierBusinessType.class);
+        CriteriaQuery<ClassifierBankPurpose> criteriaQuery = criteriaBuilder
+                .createQuery(ClassifierBankPurpose.class);
 
-        Root<ClassifierBusinessType> root = criteriaQuery.from(ClassifierBusinessType.class);
+        Root<ClassifierBankPurpose> root = criteriaQuery.from(ClassifierBankPurpose.class);
 
         Predicate namePredicate = criteriaBuilder.like(root.get("name"), "%" + name + "%");
         Predicate updatedByPredicate = criteriaBuilder.like(root.get("updatedBy"), "%" + updatedBy + "%");
@@ -33,7 +33,7 @@ public class BusinessType {
         Predicate orPredicate = criteriaBuilder.or(namePredicate, updatedByPredicate, versionPredicate);
 
         criteriaQuery.where(orPredicate);
-        TypedQuery<ClassifierBusinessType> query = entityManager.createQuery(criteriaQuery);
+        TypedQuery<ClassifierBankPurpose> query = entityManager.createQuery(criteriaQuery);
         return query.getResultList();
     }
 }

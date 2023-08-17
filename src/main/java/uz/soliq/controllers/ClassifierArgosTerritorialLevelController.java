@@ -4,42 +4,51 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.soliq.common.ResponseData;
-import uz.soliq.dto.ClassifierArgosCategoryDTO;
-import uz.soliq.entities.ClassifierArgosCategory;
+import uz.soliq.dto.ClassifierArgosTerritorialLevelDTO;
+import uz.soliq.entities.ClassifierArgosTerritorialLevel;
 import uz.soliq.exceptions.CustomNotFoundException;
-import uz.soliq.services.ClassifierArgosCategoryService;
+import uz.soliq.services.ClassifierArgosTerritorialLevelService;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/classifierArgosCategory")
-public class ClassifierArgosCategoryController {
+@RequestMapping("/classifierArgosTerritorialLevel")
+public class ClassifierArgosTerritorialLevelController {
 
-    private final ClassifierArgosCategoryService service;
+    private final ClassifierArgosTerritorialLevelService service;
 
     @GetMapping("/get/all")
-    public ResponseEntity<ResponseData<List<ClassifierArgosCategory>>> getAll() {
+    public ResponseEntity<ResponseData<List<ClassifierArgosTerritorialLevel>>> getAll() {
         return service.getAll();
     }
 
     @GetMapping("/get/{id}")
-    public ClassifierArgosCategory get(@PathVariable(value = "id") String id) throws CustomNotFoundException {
+    public ClassifierArgosTerritorialLevel get(@PathVariable(value = "id") String id) throws CustomNotFoundException {
         return service.findById(id);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<ResponseData<ClassifierArgosCategory>> add(@RequestBody ClassifierArgosCategoryDTO dto) {
+    public ResponseEntity<ResponseData<ClassifierArgosTerritorialLevel>> add(
+            @RequestBody ClassifierArgosTerritorialLevelDTO dto) {
         return service.add(dto);
     }
 
     @PutMapping("/edit")
-    public ResponseEntity<ResponseData<ClassifierArgosCategory>> edit(@RequestBody ClassifierArgosCategoryDTO dto) {
+    public ResponseEntity<ResponseData<ClassifierArgosTerritorialLevel>> edit(
+            @RequestBody ClassifierArgosTerritorialLevelDTO dto) {
         return service.edit(dto);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<ResponseData<Boolean>> delete(@PathVariable(value = "id") String id) {
         return service.delete(id);
+    }
+
+    @GetMapping("/get/all/{createdBy}/{deletedBy}/{updatedBy}")
+    public ResponseEntity<ResponseData<List<ClassifierArgosTerritorialLevel>>> getAllBySimpleQuery(
+            @PathVariable(value = "createdBy") String createdBy, @PathVariable(value = "deletedBy") String deletedBy,
+            @PathVariable(value = "updatedBy") String updatedBy) {
+        return service.findBySimpleQuery(createdBy, deletedBy, updatedBy);
     }
 }

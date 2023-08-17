@@ -10,10 +10,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClassifierAreaDTO {
+public class ClassifierZipCodeDTO {
 
     @JsonProperty("id")
     private String id;
+
+    @JsonProperty("code")
+    private String code;
 
     @JsonProperty("createdBy")
     private String createdBy;
@@ -26,13 +29,4 @@ public class ClassifierAreaDTO {
 
     @JsonProperty("version")
     private Long version;
-
-    @JsonProperty("administrativeCenterId")
-    private String administrativeCenterId;
-
-    @JsonProperty("areaId")
-    private String areaId;
-
-    @JsonProperty("regionId")
-    private String regionId;
 }

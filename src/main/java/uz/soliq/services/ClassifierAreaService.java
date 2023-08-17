@@ -15,4 +15,5 @@ public interface ClassifierAreaService {
     ResponseEntity<ResponseData<ClassifierArea>> add(ClassifierAreaDTO dto);
     ResponseEntity<ResponseData<ClassifierArea>> edit(ClassifierAreaDTO dto);
     ResponseEntity<ResponseData<Boolean>> delete(String id);
+    ResponseEntity<ResponseData<List<ClassifierArea>>> findBySimpleQuery(Long version, String areaId, String regionId);
 }

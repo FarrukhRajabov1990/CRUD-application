@@ -15,4 +15,5 @@ public interface ClassifierBankPurposeService {
     ResponseEntity<ResponseData<ClassifierBankPurpose>> add(ClassifierBankPurposeDTO dto);
     ResponseEntity<ResponseData<ClassifierBankPurpose>> edit(ClassifierBankPurposeDTO dto);
     ResponseEntity<ResponseData<Boolean>> delete(String id);
+    ResponseEntity<ResponseData<List<ClassifierBankPurpose>>> findBySimpleQuery(String name, String updatedBy, Long version);
 }

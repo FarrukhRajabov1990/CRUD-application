@@ -10,6 +10,7 @@ import uz.soliq.exceptions.CustomNotFoundException;
 import uz.soliq.mapper.ClassifierArgosCategoryMapper;
 import uz.soliq.repositories.ClassifierArgosCategoryRepo;
 import uz.soliq.services.ClassifierArgosCategoryService;
+import uz.soliq.specifications.ArgosCategory;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,7 @@ public class ClassifierArgosCategoryServiceImpl implements ClassifierArgosCatego
 
     private final ClassifierArgosCategoryRepo repo;
     private final ClassifierArgosCategoryMapper mapper;
+    private final ArgosCategory querySearch;
 
     @Override
     public ClassifierArgosCategory findById(String id) throws CustomNotFoundException {
@@ -61,5 +63,11 @@ public class ClassifierArgosCategoryServiceImpl implements ClassifierArgosCatego
         }
         repo.delete(category.get());
         return ResponseData.success200(true);
+    }
+
+    @Override
+    public ResponseEntity<ResponseData<List<ClassifierArgosCategory>>> findBySimpleQuery(
+            String code, String name, Long version) {
+        return ResponseData.success200(querySearch.findAllBySimpleQuery(code, name, version));
     }
 }

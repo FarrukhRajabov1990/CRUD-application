@@ -2,7 +2,7 @@ package uz.soliq.specifications;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import uz.soliq.entities.ClassifierArgosCategory;
+import uz.soliq.entities.ClassifierIndividualEntrepreneurActivityType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -14,17 +14,17 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class ArgosCategory {
+public class IndividualEntrepreneurActivityType {
 
     private final EntityManager entityManager;
 
-    public List<ClassifierArgosCategory> findAllBySimpleQuery(
+    public List<ClassifierIndividualEntrepreneurActivityType> findAllBySimpleQuery(
             String code, String name, Long version ) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<ClassifierArgosCategory> criteriaQuery = criteriaBuilder
-                .createQuery(ClassifierArgosCategory.class);
+        CriteriaQuery<ClassifierIndividualEntrepreneurActivityType> criteriaQuery = criteriaBuilder
+                .createQuery(ClassifierIndividualEntrepreneurActivityType.class);
 
-        Root<ClassifierArgosCategory> root = criteriaQuery.from(ClassifierArgosCategory.class);
+        Root<ClassifierIndividualEntrepreneurActivityType> root = criteriaQuery.from(ClassifierIndividualEntrepreneurActivityType.class);
 
         Predicate codePredicate = criteriaBuilder.equal(root.get("code"), code);
         Predicate namePredicate = criteriaBuilder.like(root.get("name"), "%" + name + "%");
@@ -33,7 +33,7 @@ public class ArgosCategory {
         Predicate orPredicate = criteriaBuilder.or(codePredicate, namePredicate, versionPredicate);
 
         criteriaQuery.where(orPredicate);
-        TypedQuery<ClassifierArgosCategory> query = entityManager.createQuery(criteriaQuery);
+        TypedQuery<ClassifierIndividualEntrepreneurActivityType> query = entityManager.createQuery(criteriaQuery);
         return query.getResultList();
     }
 }

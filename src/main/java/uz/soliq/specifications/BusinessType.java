@@ -2,7 +2,7 @@ package uz.soliq.specifications;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import uz.soliq.entities.ClassifierArgosCategory;
+import uz.soliq.entities.ClassifierBusinessType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -14,26 +14,26 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class ArgosCategory {
+public class BusinessType {
 
     private final EntityManager entityManager;
 
-    public List<ClassifierArgosCategory> findAllBySimpleQuery(
-            String code, String name, Long version ) {
+    public List<ClassifierBusinessType> findAllBySimpleQuery(
+            String name, String updatedBy, Long version ) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<ClassifierArgosCategory> criteriaQuery = criteriaBuilder
-                .createQuery(ClassifierArgosCategory.class);
+        CriteriaQuery<ClassifierBusinessType> criteriaQuery = criteriaBuilder
+                .createQuery(ClassifierBusinessType.class);
 
-        Root<ClassifierArgosCategory> root = criteriaQuery.from(ClassifierArgosCategory.class);
+        Root<ClassifierBusinessType> root = criteriaQuery.from(ClassifierBusinessType.class);
 
-        Predicate codePredicate = criteriaBuilder.equal(root.get("code"), code);
         Predicate namePredicate = criteriaBuilder.like(root.get("name"), "%" + name + "%");
+        Predicate updatedByPredicate = criteriaBuilder.like(root.get("updatedBy"), "%" + updatedBy + "%");
         Predicate versionPredicate = criteriaBuilder.equal(root.get("version"), version);
 
-        Predicate orPredicate = criteriaBuilder.or(codePredicate, namePredicate, versionPredicate);
+        Predicate orPredicate = criteriaBuilder.or(namePredicate, updatedByPredicate, versionPredicate);
 
         criteriaQuery.where(orPredicate);
-        TypedQuery<ClassifierArgosCategory> query = entityManager.createQuery(criteriaQuery);
+        TypedQuery<ClassifierBusinessType> query = entityManager.createQuery(criteriaQuery);
         return query.getResultList();
     }
 }

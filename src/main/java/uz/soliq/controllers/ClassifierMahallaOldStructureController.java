@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.soliq.common.ResponseData;
 import uz.soliq.dto.ClassifierMahallaOldStructureDTO;
+import uz.soliq.entities.ClassifierGender;
 import uz.soliq.entities.ClassifierMahallaOldStructure;
 import uz.soliq.exceptions.CustomNotFoundException;
 import uz.soliq.services.ClassifierMahallaOldStructureService;
@@ -41,5 +42,12 @@ public class ClassifierMahallaOldStructureController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<ResponseData<Boolean>> delete(@PathVariable(value = "id") String id) {
         return service.delete(id);
+    }
+
+    @GetMapping("/get/all/{code}/{name}/{version}")
+    public ResponseEntity<ResponseData<List<ClassifierGender>>> getAllBySimpleQuery(
+            @PathVariable(value = "code") Integer code, @PathVariable(value = "name") String name,
+            @PathVariable(value = "version") Long version) {
+        return service.findBySimpleQuery(code, name, version);
     }
 }

@@ -10,6 +10,7 @@ import uz.soliq.exceptions.CustomNotFoundException;
 import uz.soliq.mapper.ClassifierMahallaMapper;
 import uz.soliq.repositories.ClassifierMahallaRepo;
 import uz.soliq.services.ClassifierMahallaService;
+import uz.soliq.specifications.Mahalla;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,7 @@ public class ClassifierMahallaServiceImpl implements ClassifierMahallaService {
 
     private final ClassifierMahallaRepo repo;
     private final ClassifierMahallaMapper mapper;
+    private final Mahalla querySearch;
 
     @Override
     public ClassifierMahalla findById(String id) throws CustomNotFoundException {
@@ -61,5 +63,11 @@ public class ClassifierMahallaServiceImpl implements ClassifierMahallaService {
         }
         repo.delete(mahallaOptional.get());
         return ResponseData.success200(true);
+    }
+
+    @Override
+    public ResponseEntity<ResponseData<List<ClassifierMahalla>>> findBySimpleQuery(
+            String name, Long code, Long version) {
+        return ResponseData.success200(querySearch.findAllBySimpleQuery(name, code, version));
     }
 }
